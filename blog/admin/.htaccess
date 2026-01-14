@@ -1,0 +1,12 @@
+# SEO-friendly admin URLs
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} ^.*/admin/?$
+RewriteRule ^/?$ login.php [L]
+
+# Route /admin/dashboard to dashboard.php
+RewriteRule ^dashboard/?$ dashboard.php [L]
+
+# Prevent direct access to .php files except login.php and dashboard.php
+RewriteCond %{REQUEST_URI} !(/login\.php|/dashboard\.php)$
+RewriteRule ^([a-zA-Z0-9_-]+)\.php$ - [F]

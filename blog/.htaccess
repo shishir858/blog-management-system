@@ -1,0 +1,17 @@
+
+# .htaccess for SEO-friendly URLs inside /blog
+RewriteEngine On
+
+# Homepage: /blog
+RewriteRule ^$ index.php [L]
+
+# Category: /blog/category/slug
+RewriteRule ^category/([a-zA-Z0-9-]+)/?$ category.php?slug=$1 [L]
+
+# Tag: /blog/tag/slug
+RewriteRule ^tag/([a-zA-Z0-9-]+)/?$ tag.php?slug=$1 [L]
+
+# Blog post details: /blog/slug (only if not a real file/folder)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9-]+)/?$ post.php?slug=$1 [L]
