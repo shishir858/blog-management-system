@@ -42,25 +42,31 @@ $relatedPosts = $related->fetchAll();
 <body>
     <?php require __DIR__ . '/includes/header.php'; ?>
     <!-- Banner -->
-    <?php if (!empty($post['featured_image'])): ?>
+    <?php
+    $imgSrc = (!empty($post['featured_image']))
+        ? $post['featured_image']
+        : 'assets/img/default.jpg';
+    ?>
     <section class="blog-banner mb-0 position-relative" style="background: #f8f9fa;">
-        <img src="/blog/assets/uploads/posts/<?=htmlspecialchars($post['featured_image'])?>" alt="<?=htmlspecialchars($post['title'])?>" class="w-100" style="max-height:340px;object-fit:cover;">
+        <img src="<?= htmlspecialchars($imgSrc) ?>" alt="<?=htmlspecialchars($post['title'])?>" class="w-100" style="max-height:340px;object-fit:cover;">
     </section>
-    <?php endif; ?>
-    <!-- Title -->
-    <div class="container">
+    <!-- Main Title (above meta) -->
+    <!-- <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="display-5 fw-bold mb-3 mt-4 text-dark text-center"><?=htmlspecialchars($post['title'])?></h1>
+                <h1 class="display-5 fw-bold mb-4 mt-4 text-dark text-center"><?=htmlspecialchars($post['title'])?></h1>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Main Section -->
-    <div class="container">
+    <div class="container mt-5">
         <div class="row gy-5 gx-lg-5">
             <!-- Left: Post Details & Comments -->
             <main class="col-lg-8">
-                <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4 border-0">
+                    <div class="bg-white p-md-5 rounded-4 shadow-sm mb-4 border-0">
+                            <div class="col-12">
+                        <h1 class="display-5 fw-bold mb-3 text-dark "><?=htmlspecialchars($post['title'])?></h1>
+                    </div>
                     <div class="d-flex flex-wrap gap-3 align-items-center mb-3 text-muted small">
                         <span><i class="bi bi-person"></i> <?=htmlspecialchars($post['username'])?></span>
                         <span><i class="bi bi-calendar"></i> <?=date('d M Y', strtotime($post['created_at']))?></span>
