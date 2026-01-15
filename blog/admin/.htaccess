@@ -7,6 +7,11 @@ RewriteRule ^/?$ login.php [L]
 # Route /admin/dashboard to dashboard.php
 RewriteRule ^dashboard/?$ dashboard.php [L]
 
-# Prevent direct access to .php files except login.php and dashboard.php
-RewriteCond %{REQUEST_URI} !(/login\.php|/dashboard\.php)$
+# Prevent direct access to .php files except login.php, dashboard.php, and logout.php
+RewriteCond %{REQUEST_URI} !(/login\.php|/dashboard\.php|/logout\.php)$
 RewriteRule ^([a-zA-Z0-9_-]+)\.php$ - [F]
+
+# Explicitly allow logout.php
+<Files "logout.php">
+	Require all granted
+</Files>

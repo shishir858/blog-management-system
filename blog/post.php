@@ -79,7 +79,7 @@ $relatedPosts = $related->fetchAll();
                         <?php endif; ?>
                     </div>
                     <div class="single-post-content fs-5 lh-lg mb-4">
-                        <?= $post['content'] ?>
+                        <?= str_replace('../../assets/uploads/tinymce/', 'assets/uploads/tinymce/', $post['content']) ?>
                     </div>
                     <?php if ($tagsArr): ?>
                         <div class="single-post-tags mt-3">
@@ -92,7 +92,22 @@ $relatedPosts = $related->fetchAll();
                     <!-- Comments Section Placeholder -->
                     <div class="mt-5">
                         <h4 class="mb-3">Comments</h4>
-                        <div class="alert alert-info">Comments system coming soon!</div>
+                        <div class="card p-4 border-0 shadow-sm mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="rounded-circle bg-secondary" style="width:40px;height:40px;"></div>
+                                <div class="ms-3">
+                                    <span class="fw-semibold">Guest</span>
+                                    <span class="text-muted small ms-2">Just now</span>
+                                </div>
+                            </div>
+                            <div class="text-muted">Comments system coming soon!</div>
+                        </div>
+                        <form class="mt-4">
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="3" placeholder="Add a comment..." disabled></textarea>
+                            </div>
+                            <button class="btn btn-primary" type="submit" disabled>Post Comment</button>
+                        </form>
                     </div>
                 </div>
             </main>

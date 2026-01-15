@@ -40,9 +40,16 @@ if (isset($_FILES['file'])) {
     
     // Move uploaded file
     if (move_uploaded_file($file['tmp_name'], $filePath)) {
-        // Return JSON response with file location
+        // For TinyMCE admin: return relative path and image dimensions
         $fileUrl = '../../assets/uploads/tinymce/' . $newFileName;
-        echo json_encode(['location' => $fileUrl]);
+        $imgInfo = @getimagesize($filePath);
+        $width = $imgInfo ? $imgInfo[0] : null;
+        $height = $imgInfo ? $imgInfo[1] : null;
+        echo json_encode([
+            'location' => $fileUrl,
+            'width' => $width,
+            'height' => $height
+        ]);
     } else {
         http_response_code(500);
         echo json_encode(['error' => 'Failed to upload file']);

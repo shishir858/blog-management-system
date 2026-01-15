@@ -8,6 +8,6 @@ return [
     'asset_base' => '',
     // Database settings
     'dsn' => 'mysql:host=localhost;dbname=blog-managment-system;charset=utf8mb4',
-    'db_user' => 'root', // Change if your MySQL user is different
-    'db_pass' => '',     // Change if your MySQL password is set
+    'db_user' => 'root', 
+    'db_pass' => '',     
 ];
