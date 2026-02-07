@@ -33,7 +33,19 @@ $relatedPosts = $related->fetchAll();
     <meta charset="UTF-8">
     <title><?=htmlspecialchars($post['meta_title'] ?: $post['title'])?></title>
     <meta name="description" content="<?=htmlspecialchars($post['meta_description'])?>">
-    <link rel="canonical" href="/blog/<?=htmlspecialchars($post['slug'])?>">
+    <?php if (!empty($post['meta_keywords'])): ?>
+        <meta name="keywords" content="<?=htmlspecialchars($post['meta_keywords'])?>">
+    <?php endif; ?>
+    <link rel="canonical" href="<?php
+        if (!empty($post['canonical_url'])) {
+            echo htmlspecialchars($post['canonical_url']);
+        } else {
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+            $host = $_SERVER['HTTP_HOST'] ?? '';
+            $base = rtrim($config['base_url'], '/');
+            echo $protocol . $host . $base . '/' . htmlspecialchars($post['slug']);
+        }
+    ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

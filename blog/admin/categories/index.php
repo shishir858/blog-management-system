@@ -25,12 +25,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if (empty($name)) {
         $error = 'Category name is required';
     } else {
-        try {
+        // Check if slug already exists
+        $checkSlug = $pdo->prepare("SELECT id FROM categories WHERE slug = ?");
+        $checkSlug->execute([$slug]);
+        if ($checkSlug->fetch()) {
+            $error = 'Category slug already exists';
+        } else {
             $stmt = $pdo->prepare("INSERT INTO categories (name, slug, description) VALUES (?, ?, ?)");
             $stmt->execute([$name, $slug, $description]);
             $success = 'Category added successfully';
-        } catch (PDOException $e) {
-            $error = 'Category slug already exists';
         }
     }
 }
@@ -47,12 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if (empty($name)) {
         $error = 'Category name is required';
     } else {
-        try {
+        // Check if slug exists for another category
+        $checkSlug = $pdo->prepare("SELECT id FROM categories WHERE slug = ? AND id != ?");
+        $checkSlug->execute([$slug, $id]);
+        if ($checkSlug->fetch()) {
+            $error = 'Category slug already exists';
+        } else {
             $stmt = $pdo->prepare("UPDATE categories SET name=?, slug=?, description=? WHERE id=?");
             $stmt->execute([$name, $slug, $description, $id]);
             $success = 'Category updated successfully';
-        } catch (PDOException $e) {
-            $error = 'Category slug already exists';
         }
     }
 }

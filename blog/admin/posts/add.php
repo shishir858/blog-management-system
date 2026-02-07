@@ -30,6 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $slug = preg_replace('/-+/', '-', $slug);
     $slug = trim($slug, '-');
 
+    // Check if slug already exists (excluding trash)
+    $checkSlug = $pdo->prepare("SELECT id FROM posts WHERE slug = ? AND status != 'trash'");
+    $checkSlug->execute([$slug]);
+    if ($checkSlug->fetch()) {
+        $error = 'Slug already exists! Please use a different slug.';
+    }
+
     $meta_title       = trim($_POST['meta_title']);
     $meta_keywords    = trim($_POST['meta_keywords']);
     $meta_description = trim($_POST['meta_description']);

@@ -61,6 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $slug = preg_replace('/-+/', '-', $slug);
     $slug = trim($slug, '-');
 
+    // Check if slug exists for another post (excluding trash)
+    $checkSlug = $pdo->prepare("SELECT id, title FROM posts WHERE slug = ? AND id != ? AND status != 'trash'");
+    $checkSlug->execute([$slug, $post_id]);
+    $existingPost = $checkSlug->fetch();
+    if ($existingPost) {
+        $error = 'Slug already exists! This slug is used by post: "' . htmlspecialchars($existingPost['title']) . '" (ID: ' . $existingPost['id'] . ')';
+    }
+
     $meta_title       = trim($_POST['meta_title']);
     $meta_keywords    = trim($_POST['meta_keywords']);
     $meta_description = trim($_POST['meta_description']);

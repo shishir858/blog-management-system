@@ -24,12 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if (empty($name)) {
         $error = 'Tag name is required';
     } else {
-        try {
+        // Check if slug already exists
+        $checkSlug = $pdo->prepare("SELECT id FROM tags WHERE slug = ?");
+        $checkSlug->execute([$slug]);
+        if ($checkSlug->fetch()) {
+            $error = 'Tag slug already exists';
+        } else {
             $stmt = $pdo->prepare("INSERT INTO tags (name, slug) VALUES (?, ?)");
             $stmt->execute([$name, $slug]);
             $success = 'Tag added successfully';
-        } catch (PDOException $e) {
-            $error = 'Tag slug already exists';
         }
     }
 }
@@ -45,12 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if (empty($name)) {
         $error = 'Tag name is required';
     } else {
-        try {
+        // Check if slug exists for another tag
+        $checkSlug = $pdo->prepare("SELECT id FROM tags WHERE slug = ? AND id != ?");
+        $checkSlug->execute([$slug, $id]);
+        if ($checkSlug->fetch()) {
+            $error = 'Tag slug already exists';
+        } else {
             $stmt = $pdo->prepare("UPDATE tags SET name=?, slug=? WHERE id=?");
             $stmt->execute([$name, $slug, $id]);
             $success = 'Tag updated successfully';
-        } catch (PDOException $e) {
-            $error = 'Tag slug already exists';
         }
     }
 }
