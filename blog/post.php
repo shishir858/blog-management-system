@@ -31,11 +31,20 @@ $relatedPosts = $related->fetchAll();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?=htmlspecialchars($post['meta_title'] ?: $post['title'])?></title>
     <meta name="description" content="<?=htmlspecialchars($post['meta_description'])?>">
     <?php if (!empty($post['meta_keywords'])): ?>
         <meta name="keywords" content="<?=htmlspecialchars($post['meta_keywords'])?>">
     <?php endif; ?>
+    <?php
+    // Add robots meta tag based on index_status
+    $robots = 'index, follow';
+    if (isset($post['index_status']) && strtolower($post['index_status']) === 'noindex') {
+        $robots = 'noindex, nofollow';
+    }
+    ?>
+    <meta name="robots" content="<?=$robots?>">
     <link rel="canonical" href="<?php
         if (!empty($post['canonical_url'])) {
             echo htmlspecialchars($post['canonical_url']);
@@ -46,7 +55,6 @@ $relatedPosts = $related->fetchAll();
             echo $protocol . $host . $base . '/' . htmlspecialchars($post['slug']);
         }
     ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">

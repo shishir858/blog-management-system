@@ -49,7 +49,6 @@ $posts = $stmt->fetchAll();
 <?php require 'partials/header.php'; ?>
 <div class="container-fluid">
 <div class="row">
-
 <!-- SIDEBAR -->
 <nav class="col-md-3 col-lg-2 sidebar d-md-block" id="sidebarMenu">
     <div class="sidebar-header">
@@ -110,6 +109,27 @@ $posts = $stmt->fetchAll();
 <div class="wrap">
 <h1 class="wp-heading-inline">Dashboard</h1>
 <hr class="wp-header-end">
+
+<!-- SEO & Sitemap Info -->
+<div class="col-md-12 mb-3">
+    <div class="alert alert-info" style="display:flex;align-items:center;gap:20px;">
+        <div>
+            <b>Sitemap Index:</b> <a href="/sitemap.xml" target="_blank">sitemap.xml</a>
+        </div>
+        <div>
+            <b>Robots.txt:</b> <a href="/robots.txt" target="_blank">View robots.txt</a>
+        </div>
+        <div>
+            <b>Indexing Summary:</b> 
+            <?php
+            $indexCount = $pdo->query("SELECT COUNT(*) FROM posts WHERE index_status='index' AND status='published'")->fetchColumn();
+            $noindexCount = $pdo->query("SELECT COUNT(*) FROM posts WHERE index_status='noindex' AND status='published'")->fetchColumn();
+            ?>
+            <span class="badge bg-success">Index: <?=$indexCount?></span>
+            <span class="badge bg-warning text-dark">NoIndex: <?=$noindexCount?></span>
+        </div>
+    </div>
+</div>
 
 <!-- STATS CARDS -->
 <div class="row g-3 mt-3">

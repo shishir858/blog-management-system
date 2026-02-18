@@ -175,52 +175,45 @@ document.addEventListener("DOMContentLoaded", function () {
         height: 420,
         plugins: 'lists link image code table media preview',
         toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code',
-        
-        /* Image Upload Configuration */
         images_upload_url: 'upload-image.php',
         automatic_uploads: true,
         images_reuse_filename: false,
         file_picker_types: 'image',
-        
+        // Force absolute URLs for all links/images (SEO)
+        convert_urls: true,
+        relative_urls: false,
+        remove_script_host: false,
+        document_base_url: window.location.origin + '/blog/',
         /* Image Upload Handler */
         images_upload_handler: function (blobInfo, progress) {
             return new Promise(function(resolve, reject) {
                 var xhr = new XMLHttpRequest();
                 xhr.withCredentials = false;
                 xhr.open('POST', 'upload-image.php');
-                
                 xhr.upload.onprogress = function(e) {
                     progress(e.loaded / e.total * 100);
                 };
-                
                 xhr.onload = function() {
                     if (xhr.status === 403) {
                         reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
                         return;
                     }
-                    
                     if (xhr.status < 200 || xhr.status >= 300) {
                         reject('HTTP Error: ' + xhr.status);
                         return;
                     }
-                    
                     var json = JSON.parse(xhr.responseText);
-                    
                     if (!json || typeof json.location != 'string') {
                         reject('Invalid JSON: ' + xhr.responseText);
                         return;
                     }
-                    
                     resolve(json.location);
                 };
-                
                 xhr.onerror = function() {
                     reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
                 };
-                
                 var formData = new FormData();
                 formData.append('file', blobInfo.blob(), blobInfo.filename());
-                
                 xhr.send(formData);
             });
         }

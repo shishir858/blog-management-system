@@ -40,7 +40,7 @@
                             Edit Profile
                         </a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="logout.php">
+                        <li><a class="dropdown-item text-danger" href="/blog-management-system/blog/admin/logout.php">
                             <svg width="16" height="16" fill="currentColor" class="me-2" style="vertical-align: middle;">
                                 <path d="M3 3h8v2H3v10h8v2H3a2 2 0 01-2-2V5a2 2 0 012-2zm10 4l4 4-4 4v-3H7V8h6V5z"/>
                             </svg>

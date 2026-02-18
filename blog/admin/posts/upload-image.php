@@ -40,8 +40,11 @@ if (isset($_FILES['file'])) {
     
     // Move uploaded file
     if (move_uploaded_file($file['tmp_name'], $filePath)) {
-        // For TinyMCE admin: return relative path and image dimensions
-        $fileUrl = '../../assets/uploads/tinymce/' . $newFileName;
+        // For TinyMCE admin: return absolute URL and image dimensions (SEO friendly)
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+        $host = $_SERVER['HTTP_HOST'] ?? '';
+        $basePath = rtrim(dirname(dirname(dirname($_SERVER['SCRIPT_NAME']))), '/'); // /blog-management-system/blog
+        $fileUrl = $protocol . $host . $basePath . '/assets/uploads/tinymce/' . $newFileName;
         $imgInfo = @getimagesize($filePath);
         $width = $imgInfo ? $imgInfo[0] : null;
         $height = $imgInfo ? $imgInfo[1] : null;

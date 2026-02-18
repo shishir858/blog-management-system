@@ -1,0 +1,31 @@
+# Robots.txt for ledtvrepairservicecenter.com
+# Allow all search engines to crawl
+
+User-agent: *
+# Block sensitive folders (root and blog)
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /config/
+Disallow: /database/
+Disallow: /backup/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /*?search=
+Disallow: /*?s=
+Disallow: /cgi-bin/
+Disallow: /blog/admin/
+Disallow: /blog/includes/
+
+# Allow important directories
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /uploads/
+
+# Sitemap location (update with your actual sitemap URL)
+Sitemap: https://www.ledtvrepairservicecenter.com/sitemap.xml
+Sitemap: https://www.ledtvrepairservicecenter.com/sitemap-pages.xml
+Sitemap: https://www.ledtvrepairservicecenter.com/sitemap-blog.xml.php
