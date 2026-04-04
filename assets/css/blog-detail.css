@@ -1,0 +1,604 @@
+/**
+ * Blog article (blog-detail.php) — separate from index list CSS.
+ * Host override:
+ *   .ubs.ubs-blog-detail-page { --bms-accent: #...; --bms-prose-max: 720px; }
+ */
+
+.ubs.ubs-blog-detail-page {
+    --bms-accent: var(--ubs-primary, #0ea5e9);
+    --bms-accent-soft: var(--ubs-primary-soft, color-mix(in srgb, var(--bms-accent) 22%, transparent));
+    --bms-surface: var(--ubs-surface, #0c4a6e);
+    --bms-text: var(--ubs-text, #0f172a);
+    --bms-muted: var(--ubs-muted, #64748b);
+    --bms-card: var(--ubs-card, #ffffff);
+    --bms-radius: var(--ubs-radius, 16px);
+    --bms-radius-sm: var(--ubs-radius-sm, 10px);
+    --bms-shadow: var(--ubs-shadow, 0 18px 50px rgba(15, 23, 42, 0.08));
+    --bms-prose: #334155;
+    --bms-prose-heading: var(--bms-surface);
+    --bms-code-bg: #f1f5f9;
+    --bms-prose-max: 100%;
+    /* Optional cap for embeds; main images use 100% of article */
+    --bms-section-inner: 100%;
+}
+
+/* Hero */
+.ubs-blog-detail-page .ubs-page-hero {
+    background: linear-gradient(
+        125deg,
+        var(--bms-surface) 0%,
+        color-mix(in srgb, var(--bms-surface) 70%, #0369a1) 45%,
+        color-mix(in srgb, var(--bms-accent) 40%, var(--bms-surface)) 100%
+    );
+    color: #f8fafc;
+    padding: clamp(2rem, 5vw, 3.25rem) 0;
+}
+
+.ubs-blog-detail-page .ubs-breadcrumb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+    opacity: 0.88;
+}
+
+.ubs-blog-detail-page .ubs-breadcrumb a {
+    color: #cbd5e1;
+}
+
+.ubs-blog-detail-page .ubs-breadcrumb a:hover {
+    color: #fff;
+}
+
+.ubs-blog-detail-page .ubs-breadcrumb li:not(:last-child)::after {
+    content: "/";
+    margin-left: 0.75rem;
+    opacity: 0.45;
+}
+
+/* Featured image — full width of article card */
+.bms-featured {
+    margin: 0 0 1.75rem;
+    padding: 0;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+}
+
+.bms-featured__inner {
+    overflow: hidden;
+    border-radius: var(--bms-radius);
+    background: linear-gradient(145deg, var(--bms-accent-soft), color-mix(in srgb, var(--bms-surface) 6%, #e2e8f0));
+    box-shadow: 0 12px 40px color-mix(in srgb, var(--bms-accent) 18%, transparent);
+    border: 1px solid color-mix(in srgb, var(--bms-accent) 25%, transparent);
+}
+
+.bms-featured__inner img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Article shell */
+.ubs-article--detail {
+    padding: clamp(2.5rem, 6vw, 4rem) 0;
+}
+
+.ubs-blog-detail-page .ubs-article-card {
+    background: var(--bms-card);
+    border-radius: var(--bms-radius);
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 10%, transparent);
+    box-shadow: var(--bms-shadow);
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.ubs-blog-detail-page .ubs-article-card--wide {
+    max-width: none;
+    margin: 0;
+    width: 100%;
+}
+
+.ubs-blog-detail-page .ubs-article-card h1 {
+    font-family: var(--ubs-display, "Outfit", system-ui, sans-serif);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 3vw, 2.35rem);
+    letter-spacing: -0.025em;
+    color: var(--bms-prose-heading);
+    line-height: 1.18;
+    margin-bottom: 1.35rem;
+}
+
+.ubs-blog-detail-page .ubs-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+    background: var(--bms-accent-soft);
+    color: var(--bms-accent);
+}
+
+.ubs-blog-detail-page .ubs-badge--muted {
+    background: color-mix(in srgb, var(--bms-surface) 8%, #f1f5f9);
+    color: var(--bms-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    font-size: 0.78rem;
+}
+
+/* Inline image + text/list: 50/50 — row height = taller column; image stretches to match list */
+.bms-split-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: stretch;
+    margin: 1.75rem 0;
+    width: 100%;
+}
+
+/* 2nd, 4th, … two-column splits: list left, image right */
+.bms-split-row--flip .bms-split-media {
+    order: 2;
+}
+
+.bms-split-row--flip .bms-split-body {
+    order: 1;
+}
+
+.bms-split-row--media-only {
+    grid-template-columns: 1fr;
+}
+
+.bms-split-row--media-only .bms-split-body {
+    display: none;
+}
+
+/* Image column grows with row (parallel to list height) */
+.bms-split-media {
+    min-width: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}
+
+.bms-split-row--media-only .bms-split-media {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    min-height: 0;
+}
+
+.bms-split-media > img {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 120px;
+    max-height: none;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--bms-radius-sm);
+    box-shadow: 0 10px 32px rgba(15, 23, 42, 0.1);
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 10%, transparent);
+}
+
+.bms-split-media > p {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 120px;
+}
+
+.bms-split-media > p img {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 120px;
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--bms-radius-sm);
+    box-shadow: 0 10px 32px rgba(15, 23, 42, 0.1);
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 10%, transparent);
+}
+
+.bms-split-media > figure {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    min-height: 120px;
+}
+
+.bms-split-media figure img {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 120px;
+    max-height: none;
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--bms-radius-sm);
+    box-shadow: 0 10px 32px rgba(15, 23, 42, 0.1);
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 10%, transparent);
+}
+
+/* Beat .ubs-prose img { max-height: 400px } on desktop so split image can match list height */
+@media (min-width: 768px) {
+    .ubs-blog-detail-page .ubs-prose .bms-split-media > img,
+    .ubs-blog-detail-page .ubs-prose .bms-split-media > p img,
+    .ubs-blog-detail-page .ubs-prose .bms-split-media figure img {
+        max-height: none;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.bms-split-body {
+    min-width: 0;
+    font-size: 1.0625rem;
+    line-height: 1.78;
+    color: var(--bms-prose);
+}
+
+.bms-split-body > *:first-child {
+    margin-top: 0;
+}
+
+.bms-split-body > *:last-child {
+    margin-bottom: 0;
+}
+
+.bms-split-body p {
+    margin-bottom: 1rem;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+.bms-split-body blockquote {
+    margin: 0;
+    padding: 0.75rem 0 0.75rem 1rem;
+    border-left: 4px solid var(--bms-accent);
+    background: linear-gradient(90deg, var(--bms-accent-soft), transparent 70%);
+    border-radius: 0 var(--bms-radius-sm) var(--bms-radius-sm) 0;
+    font-style: italic;
+    color: var(--bms-muted);
+}
+
+/* Lists beside image (same bullets as .ubs-prose, tighter in half column) */
+.bms-split-body ul,
+.bms-split-body ol {
+    margin: 0 0 1rem;
+    text-align: start;
+}
+
+.bms-split-body ul li,
+.bms-split-body ol li {
+    text-align: start;
+}
+
+@media (max-width: 767.98px) {
+    .bms-split-row:not(.bms-split-row--media-only) {
+        grid-template-columns: 1fr;
+    }
+
+    .bms-split-row:not(.bms-split-row--media-only) .bms-split-body {
+        display: block;
+    }
+
+    /* Stack: image on top, then text — reset desktop flip */
+    .bms-split-row--flip .bms-split-media,
+    .bms-split-row--flip .bms-split-body {
+        order: unset;
+    }
+
+    .bms-split-media > img,
+    .bms-split-media > p,
+    .bms-split-media > figure {
+        flex: none;
+        height: auto;
+        max-height: 400px;
+        min-height: 0;
+    }
+
+    .bms-split-media > p img,
+    .bms-split-media figure img {
+        flex: none;
+        height: auto;
+        max-height: 400px;
+        min-height: 0;
+    }
+}
+
+/* ——— Rich content (TinyMCE) ——— */
+.ubs-blog-detail-page .ubs-prose {
+    font-size: 1.0625rem;
+    line-height: 1.78;
+    color: var(--bms-prose);
+    max-width: var(--bms-prose-max);
+}
+
+.ubs-blog-detail-page .ubs-prose > *:first-child {
+    margin-top: 0;
+}
+
+.ubs-blog-detail-page .ubs-prose > p:first-of-type {
+    font-size: 1.125rem;
+    color: color-mix(in srgb, var(--bms-prose) 92%, var(--bms-surface));
+}
+
+.ubs-blog-detail-page .ubs-prose p {
+    margin-bottom: 1.1rem;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+.ubs-blog-detail-page .ubs-prose h2 {
+    font-family: var(--ubs-display, "Outfit", system-ui, sans-serif);
+    font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+    font-weight: 700;
+    color: var(--bms-prose-heading);
+    margin: 2.25rem 0 0.75rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 2px solid var(--bms-accent-soft);
+    letter-spacing: -0.02em;
+}
+
+.ubs-blog-detail-page .ubs-prose h3 {
+    font-family: var(--ubs-display, "Outfit", system-ui, sans-serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--bms-prose-heading);
+    margin: 1.85rem 0 0.55rem;
+    padding-left: 0.65rem;
+    border-left: 4px solid var(--bms-accent);
+    line-height: 1.35;
+}
+
+.ubs-blog-detail-page .ubs-prose h4,
+.ubs-blog-detail-page .ubs-prose h5,
+.ubs-blog-detail-page .ubs-prose h6 {
+    font-family: var(--ubs-display, "Outfit", system-ui, sans-serif);
+    font-weight: 700;
+    color: var(--bms-prose-heading);
+    margin: 1.5rem 0 0.45rem;
+    font-size: 1.05rem;
+}
+
+.ubs-blog-detail-page .ubs-prose ul,
+.ubs-blog-detail-page .ubs-prose ol {
+    margin: 0 0 1.15rem;
+    padding-left: 0;
+    list-style: none;
+}
+
+.ubs-blog-detail-page .ubs-prose ul li,
+.ubs-blog-detail-page .ubs-prose ol li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.65;
+}
+
+.ubs-blog-detail-page .ubs-prose ul li::before {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    top: 0.65em;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--bms-accent);
+    box-shadow: 0 0 0 3px var(--bms-accent-soft);
+}
+
+.ubs-blog-detail-page .ubs-prose ol {
+    counter-reset: bms-ol;
+}
+
+.ubs-blog-detail-page .ubs-prose ol li {
+    counter-increment: bms-ol;
+}
+
+.ubs-blog-detail-page .ubs-prose ol li::before {
+    content: counter(bms-ol);
+    position: absolute;
+    left: 0;
+    top: 0.05rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.35rem;
+    text-align: center;
+    border-radius: 8px;
+    background: var(--bms-accent-soft);
+    color: var(--bms-accent);
+}
+
+.ubs-blog-detail-page .ubs-prose blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.15rem 1rem 1.25rem;
+    border-left: 4px solid var(--bms-accent);
+    border-radius: 0 var(--bms-radius-sm) var(--bms-radius-sm) 0;
+    background: linear-gradient(90deg, var(--bms-accent-soft), transparent 55%);
+    color: var(--bms-muted);
+    font-style: italic;
+}
+
+.ubs-blog-detail-page .ubs-prose hr {
+    border: none;
+    height: 2px;
+    margin: 2rem 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, var(--bms-accent-soft), var(--bms-accent), var(--bms-accent-soft), transparent);
+    opacity: 0.85;
+}
+
+.ubs-blog-detail-page .ubs-prose a {
+    color: var(--bms-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.ubs-blog-detail-page .ubs-prose a:hover {
+    color: color-mix(in srgb, var(--bms-accent) 65%, #000);
+}
+
+/* Content images (not inside split): full width of prose column */
+.ubs-blog-detail-page .ubs-prose img,
+.ubs-blog-detail-page .ubs-prose video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 1.35rem 0;
+    border-radius: var(--bms-radius-sm);
+    box-shadow: 0 10px 36px rgba(15, 23, 42, 0.1);
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 10%, transparent);
+}
+
+.ubs-blog-detail-page .ubs-prose figure {
+    margin: 1.5rem 0;
+    max-width: 100%;
+    width: 100%;
+}
+
+.ubs-blog-detail-page .ubs-prose figure img {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.ubs-blog-detail-page .ubs-prose figcaption {
+    font-size: 0.875rem;
+    color: var(--bms-muted);
+    margin-top: 0.5rem;
+    text-align: center;
+    font-style: italic;
+}
+
+.ubs-blog-detail-page .ubs-prose iframe {
+    max-width: 100%;
+    border-radius: var(--bms-radius-sm);
+    margin: 1rem 0;
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 12%, transparent);
+}
+
+.ubs-blog-detail-page .ubs-prose pre {
+    background: var(--bms-code-bg);
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 10%, #e2e8f0);
+    border-radius: var(--bms-radius-sm);
+    padding: 1rem 1.15rem;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 1.25rem 0;
+}
+
+.ubs-blog-detail-page .ubs-prose code {
+    font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+    font-size: 0.9em;
+    background: var(--bms-code-bg);
+    padding: 0.15rem 0.4rem;
+    border-radius: 6px;
+    color: #0f172a;
+}
+
+.ubs-blog-detail-page .ubs-prose pre code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+}
+
+.ubs-blog-detail-page .ubs-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.35rem 0;
+    font-size: 0.95rem;
+    border-radius: var(--bms-radius-sm);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+}
+
+.ubs-blog-detail-page .ubs-prose th,
+.ubs-blog-detail-page .ubs-prose td {
+    padding: 0.65rem 0.85rem;
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 12%, #e2e8f0);
+}
+
+.ubs-blog-detail-page .ubs-prose th {
+    background: color-mix(in srgb, var(--bms-accent) 14%, #f8fafc);
+    color: var(--bms-prose-heading);
+    font-weight: 700;
+    text-align: left;
+}
+
+.ubs-blog-detail-page .ubs-prose tr:nth-child(even) td {
+    background: #f8fafc;
+}
+
+/* Related */
+.ubs-related {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid color-mix(in srgb, var(--bms-surface) 10%, transparent);
+}
+
+.ubs-blog-detail-page .ubs-related h2 {
+    font-family: var(--ubs-display, "Outfit", system-ui, sans-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--bms-prose-heading);
+}
+
+.ubs-blog-detail-page .ubs-related-card {
+    display: block;
+    padding: 1rem 1.15rem;
+    border-radius: var(--bms-radius-sm);
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 10%, transparent);
+    background: color-mix(in srgb, var(--bms-accent-soft) 35%, #fff);
+    margin-bottom: 0.75rem;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.ubs-blog-detail-page .ubs-related-card:hover {
+    border-color: var(--bms-accent);
+    background: #fff;
+    transform: translateX(4px);
+}
+
+.ubs-blog-detail-page .ubs-related-card strong {
+    display: block;
+    color: var(--bms-prose-heading);
+    margin-bottom: 0.25rem;
+}
+
+.ubs-blog-detail-page .ubs-related-card span {
+    font-size: 0.85rem;
+    color: var(--bms-muted);
+}

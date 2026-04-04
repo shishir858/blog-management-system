@@ -1,0 +1,159 @@
+/**
+ * Blog index (blog.php) — separate from article CSS.
+ * Host site override (keep .ubs on wrapper):
+ *   .ubs.ubs-blog-list-page { --bms-accent: #your; --bms-surface: #123; --bms-muted: #64748b; }
+ * Defaults map from portal shell: --ubs-primary / --ubs-surface.
+ */
+
+.ubs.ubs-blog-list-page {
+    --bms-accent: var(--ubs-primary, #0ea5e9);
+    --bms-accent-soft: var(--ubs-primary-soft, color-mix(in srgb, var(--bms-accent) 22%, transparent));
+    --bms-surface: var(--ubs-surface, #0c4a6e);
+    --bms-text: var(--ubs-text, #0f172a);
+    --bms-muted: var(--ubs-muted, #64748b);
+    --bms-card: var(--ubs-card, #ffffff);
+    --bms-radius: var(--ubs-radius, 16px);
+    --bms-radius-sm: var(--ubs-radius-sm, 10px);
+    --bms-shadow: var(--ubs-shadow, 0 18px 50px rgba(15, 23, 42, 0.08));
+}
+
+.ubs-blog-list-page .ubs-page-hero {
+    background: linear-gradient(
+        125deg,
+        var(--bms-surface) 0%,
+        color-mix(in srgb, var(--bms-surface) 70%, #0369a1) 45%,
+        color-mix(in srgb, var(--bms-accent) 40%, var(--bms-surface)) 100%
+    );
+    color: #f8fafc;
+    padding: clamp(2.5rem, 6vw, 3.75rem) 0;
+}
+
+.ubs-blog-list-page .ubs-page-hero h1 {
+    font-family: var(--ubs-display, "Outfit", system-ui, sans-serif);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.ubs-blog-list-page .ubs-breadcrumb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+    opacity: 0.88;
+}
+
+.ubs-blog-list-page .ubs-breadcrumb a {
+    color: #cbd5e1;
+}
+
+.ubs-blog-list-page .ubs-breadcrumb a:hover {
+    color: #fff;
+}
+
+.ubs-blog-list-page .ubs-breadcrumb li:not(:last-child)::after {
+    content: "/";
+    margin-left: 0.75rem;
+    opacity: 0.45;
+}
+
+.ubs-blog-list {
+    padding: clamp(2.5rem, 6vw, 4rem) 0;
+}
+
+.ubs-blog-list-page .ubs-post-card {
+    background: var(--bms-card);
+    border-radius: var(--bms-radius);
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--bms-surface) 12%, transparent);
+    box-shadow: 0 10px 36px rgba(15, 23, 42, 0.06);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ubs-blog-list-page .ubs-post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--bms-shadow);
+}
+
+.ubs-blog-list-page .ubs-post-card__media {
+    display: block;
+    height: 200px;
+    background: linear-gradient(135deg, var(--bms-accent-soft), color-mix(in srgb, var(--bms-surface) 8%, #f1f5f9));
+    position: relative;
+    overflow: hidden;
+}
+
+.ubs-blog-list-page .ubs-post-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ubs-blog-list-page .ubs-post-card__body {
+    padding: 1.25rem 1.35rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ubs-blog-list-page .ubs-post-card__body h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--bms-surface);
+    line-height: 1.35;
+}
+
+.ubs-blog-list-page .ubs-post-card__body h2 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ubs-blog-list-page .ubs-post-card__body h2 a:hover {
+    color: var(--bms-accent);
+}
+
+.ubs-blog-list-page .ubs-post-card__excerpt {
+    font-size: 0.92rem;
+    color: var(--bms-muted);
+    line-height: 1.55;
+    flex: 1;
+}
+
+.ubs-blog-list-page .ubs-post-card__foot {
+    padding: 0 1.35rem 1.25rem;
+}
+
+.ubs-blog-list-page .ubs-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+    background: var(--bms-accent-soft);
+    color: var(--bms-accent);
+}
+
+.ubs-blog-list-page .ubs-badge--muted {
+    background: color-mix(in srgb, var(--bms-surface) 8%, #f1f5f9);
+    color: var(--bms-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    font-size: 0.78rem;
+}
+
+.ubs-blog-list-page .ubs-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--bms-muted);
+}

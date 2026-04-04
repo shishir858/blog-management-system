@@ -1,0 +1,3 @@
+# Blog admin panel - minimal rules
+# Allow index, login, dashboard, logout and subfolder PHP files
+DirectoryIndex index.php

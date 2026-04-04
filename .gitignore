@@ -1,0 +1,6 @@
+# Local backups / exports (keep repo source-only)
+blog-management-system.zip
+
+# OS noise
+Thumbs.db
+.DS_Store

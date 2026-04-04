@@ -1,0 +1,389 @@
+/* Universal blog shell — keep all rules under .ubs to reduce clashes on host sites */
+
+.ubs {
+    --ubs-primary: #0ea5e9;
+    --ubs-primary-soft: color-mix(in srgb, var(--ubs-primary) 22%, transparent);
+    --ubs-surface: #0c4a6e;
+    --ubs-text: #0f172a;
+    --ubs-muted: #64748b;
+    --ubs-bg: #f0f9ff;
+    --ubs-card: #ffffff;
+    --ubs-radius: 16px;
+    --ubs-radius-sm: 10px;
+    --ubs-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+    --ubs-font: "DM Sans", system-ui, sans-serif;
+    --ubs-display: "Outfit", var(--ubs-font);
+    font-family: var(--ubs-font);
+    color: var(--ubs-text);
+    background: var(--ubs-bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.ubs a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ubs a:hover {
+    color: var(--ubs-primary);
+}
+
+.ubs-main {
+    flex: 1;
+}
+
+/* Header */
+.ubs-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    background: color-mix(in srgb, #ffffff 88%, transparent);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.ubs-navbar {
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+}
+
+.ubs-brand {
+    font-family: var(--ubs-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    color: var(--ubs-surface) !important;
+}
+
+.ubs-nav .nav-link {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--ubs-muted) !important;
+    padding: 0.45rem 0.6rem !important;
+    border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.ubs-nav .nav-link:hover {
+    color: var(--ubs-surface) !important;
+    background: rgba(15, 23, 42, 0.04);
+}
+
+.ubs-toggler {
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    padding: 0.35rem 0.55rem;
+}
+
+.ubs-toggler .navbar-toggler-icon {
+    filter: invert(0.25);
+}
+
+.ubs-btn {
+    --bs-btn-bg: var(--ubs-primary);
+    --bs-btn-border-color: var(--ubs-primary);
+    --bs-btn-hover-bg: color-mix(in srgb, var(--ubs-primary) 88%, #000);
+    --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+    --bs-btn-color: #fff;
+    --bs-btn-hover-color: #fff;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 0.55rem 1.35rem;
+    box-shadow: 0 10px 24px var(--ubs-primary-soft);
+}
+
+.ubs-btn--sm {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+}
+
+.ubs-btn--ghost {
+    background: transparent !important;
+    color: var(--ubs-surface) !important;
+    border: 1px solid rgba(15, 23, 42, 0.15) !important;
+    box-shadow: none;
+}
+
+.ubs-btn--ghost:hover {
+    background: rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Hero & sections (landing) */
+.ubs-hero {
+    position: relative;
+    padding: clamp(3.5rem, 10vw, 6rem) 0;
+    overflow: hidden;
+}
+
+.ubs-hero::before {
+    content: "";
+    position: absolute;
+    inset: -40% -20% auto -20%;
+    height: 90%;
+    background: radial-gradient(ellipse at 30% 20%, var(--ubs-primary-soft), transparent 55%),
+        radial-gradient(ellipse at 80% 0%, rgba(99, 102, 241, 0.12), transparent 45%);
+    pointer-events: none;
+}
+
+.ubs-hero-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.ubs-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ubs-primary);
+    margin-bottom: 1rem;
+}
+
+.ubs-display-title {
+    font-family: var(--ubs-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 4.5vw, 3.25rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    color: var(--ubs-surface);
+    margin-bottom: 1rem;
+}
+
+.ubs-lead {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--ubs-muted);
+    max-width: 34rem;
+    margin-bottom: 1.75rem;
+}
+
+.ubs-hero-card {
+    background: var(--ubs-card);
+    border-radius: var(--ubs-radius);
+    box-shadow: var(--ubs-shadow);
+    padding: 1.75rem;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.ubs-stat {
+    font-family: var(--ubs-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--ubs-primary);
+}
+
+.ubs-stat-label {
+    font-size: 0.85rem;
+    color: var(--ubs-muted);
+}
+
+.ubs-section {
+    padding: clamp(3rem, 8vw, 5rem) 0;
+}
+
+.ubs-section--alt {
+    background: #fff;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.ubs-section-title {
+    font-family: var(--ubs-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 3vw, 2.1rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    color: var(--ubs-surface);
+}
+
+.ubs-section-desc {
+    color: var(--ubs-muted);
+    max-width: 36rem;
+    margin-bottom: 2rem;
+}
+
+.ubs-card-grid .ubs-feature {
+    height: 100%;
+}
+
+.ubs-feature {
+    background: var(--ubs-card);
+    border-radius: var(--ubs-radius);
+    padding: 1.5rem 1.35rem;
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ubs-feature:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--ubs-shadow);
+}
+
+.ubs-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ubs-primary-soft);
+    color: var(--ubs-primary);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.ubs-feature h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--ubs-surface);
+}
+
+.ubs-feature p {
+    font-size: 0.92rem;
+    color: var(--ubs-muted);
+    margin: 0;
+    line-height: 1.55;
+}
+
+.ubs-quote {
+    background: linear-gradient(135deg, var(--ubs-surface) 0%, color-mix(in srgb, var(--ubs-surface) 65%, #020617) 100%);
+    color: #e2e8f0;
+    border-radius: var(--ubs-radius);
+    padding: 1.75rem;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.ubs-quote::after {
+    content: "\201C";
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    font-size: 4rem;
+    line-height: 1;
+    opacity: 0.12;
+    font-family: Georgia, serif;
+}
+
+.ubs-quote p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.ubs-quote footer {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    position: relative;
+    z-index: 1;
+}
+
+.ubs-form label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--ubs-surface);
+}
+
+.ubs-form .form-control {
+    border-radius: var(--ubs-radius-sm);
+    border-color: rgba(15, 23, 42, 0.12);
+    padding: 0.65rem 0.9rem;
+}
+
+.ubs-form .form-control:focus {
+    border-color: var(--ubs-primary);
+    box-shadow: 0 0 0 3px var(--ubs-primary-soft);
+}
+
+/* Blog index + article: load blog-list.css / blog-detail.css from those pages only */
+
+/* Footer */
+.ubs-footer {
+    background: var(--ubs-surface);
+    color: #cbd5e1;
+    padding: 3rem 0 0;
+    margin-top: auto;
+}
+
+.ubs-footer-brand {
+    font-family: var(--ubs-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #f1f5f9;
+    margin-bottom: 0.75rem;
+}
+
+.ubs-footer-text {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #94a3b8;
+    max-width: 28rem;
+}
+
+.ubs-footer-heading {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 0.85rem;
+}
+
+.ubs-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ubs-footer-links li {
+    margin-bottom: 0.45rem;
+}
+
+.ubs-footer-links a {
+    color: #e2e8f0;
+    font-size: 0.92rem;
+}
+
+.ubs-footer-links a:hover {
+    color: #fff;
+}
+
+.ubs-footer-bar {
+    margin-top: 2.5rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: #64748b;
+}
+
+.ubs-footer-meta {
+    opacity: 0.9;
+}
+
+.ubs-code {
+    font-size: 0.78em;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+}
+
+@media (max-width: 991px) {
+    .ubs-header .ubs-btn--sm {
+        margin-top: 0.75rem;
+        width: 100%;
+    }
+}
